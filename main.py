@@ -37,16 +37,29 @@ No one gonna Help You !!
 
 START_BUTTON = InlineKeyboardMarkup(
         [[
-        InlineKeyboardButton('↗ Join Here ↗', url='https://t.me/BughunterBots')
-        ],
-        [
-        InlineKeyboardButton('ABOUT',callback_data='cbabout')
-        ],
-        [
+        InlineKeyboardButton('↗ Join Here ↗', url='https://t.me/BughunterBots'),
+        InlineKeyboardButton('ABOUT',callback_data='cbabout'),
         InlineKeyboardButton('HELP',callback_data='cbhelp')
-        ]
-        ]
+        ]]
+        
     )
+
+@bughunter0.on_callback_query()
+async def cb_data(bot, update):  
+    if update.data == "cbhelp":
+        await update.message.edit_text(
+            text=HELP,
+            reply_markup=HELP_BUTTONS,
+            disable_web_page_preview=True
+        )
+    elif update.data == "cbabout":
+        await update.message.edit_text(
+            text=ABOUT,
+            reply_markup=ABOUT_BUTTONS,
+            disable_web_page_preview=True
+        )
+    else:
+        await update.message.delete()
 
 @bughunter0.on_message(filters.command(["start"]))
 async def start(bot, update):
