@@ -25,8 +25,8 @@ Hi **{}**, I'm PyDF Bot. I can Provide all Help regarding PDF file
 ABOUT = """
 **BOT:** `PYDF BOT`
 **AUTHOR :** [bughunter0](https://t.me/bughunter0)
-**SERVER :** 'Heroku'
-**LIBRARY :** 'Pyrogram'
+**SERVER :** `Heroku`
+**LIBRARY :** `Pyrogram`
 **SOURCE :** [BugHunterBots](https://t.me/bughunterbots)
 **LANGUAGE :** `Python 3.9`
 """
@@ -47,7 +47,7 @@ START_BUTTON = InlineKeyboardMarkup(
     )
 CLOSE_BUTTON = InlineKeyboardMarkup(
         [[
-        InlineKeyboardButton('CLOSE',callback_data='cbclose'),
+        InlineKeyboardButton('Back',callback_data='cbclose'),
         ]]
     )
 
@@ -66,7 +66,11 @@ async def cb_data(bot, update):
             disable_web_page_preview=True
         )
     else:
-        await update.message.delete()
+        await update.message.edit_text(
+            text=START_STR.format(update.from_user.mention),
+            disable_web_page_preview=True,
+            reply_markup=START_BUTTON
+        )
 
 @bughunter0.on_message(filters.command(["start"]))
 async def start(bot, update):
