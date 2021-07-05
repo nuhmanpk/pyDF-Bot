@@ -37,9 +37,11 @@ No one gonna Help You !!
 
 START_BUTTON = InlineKeyboardMarkup(
         [[
-        InlineKeyboardButton('↗ Join Here ↗', url='https://t.me/BughunterBots'),
         InlineKeyboardButton('ABOUT',callback_data='cbabout'),
         InlineKeyboardButton('HELP',callback_data='cbhelp')
+        ]],
+        [[
+        InlineKeyboardButton('↗ Join Here ↗', url='https://t.me/BughunterBots'),
         ]]
         
     )
