@@ -92,7 +92,7 @@ async def pdf_to_text(bot, message):
      num_of_pages = pdf_reader.getNumPages()
      page_no = pdf_reader.getPage(0)
      text_path = TXT_LOCATION + f"{message.chat.id}.txt"     
-     for page in range (page_no,num_of_pages):
+     for page in range (0,num_of_pages):
          text_path1 = open(TXT_LOCATION + f"{message.chat.id}.txt","a") 
          text_path1.write(f"{pageObj.extractText()}\n")
          
