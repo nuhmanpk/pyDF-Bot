@@ -100,12 +100,11 @@ async def pdf_to_text(bot, message):
      page_no = pdf_reader.getPage(0) # pageObject
     # text_path = TXT_LOCATION + f"txt{message.chat.id}.txt"     
      await txt.edit("Extracting Text from PDF...")
-     with open('myfile.txt', 'w') as fp: 
-         pass   
+     with open('bughunter0.txt', 'w') as fp:   
            for page in range (0,num_of_pages):
-              os.open("bughunter0.txt",os.O_RDWR & os.O_APPEND)
-              os.write("bughunter0.txt",f"{page_no.extractText()}")
-              os.close("bughunter0.txt")
+              os.open('bughunter0.txt',os.O_RDWR & os.O_APPEND)
+              os.write('bughunter0.txt',f"{page_no.extractText()}")
+              os.close('bughunter0.txt')
      text_path = bughunter0.txt
      await message.reply_document(text_path,caption="©@BugHunterBots")
    #  await message.reply_document(text_path1,caption="©@BugHunterBots")
