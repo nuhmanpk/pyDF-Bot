@@ -43,19 +43,24 @@ START_BUTTON = InlineKeyboardMarkup(
         ]]
         
     )
+CLOSE_BUTTON = InlineKeyboardMarkup(
+        [[
+        InlineKeyboardButton('CLOSE',callback_data='cbclose'),
+        ]]
+    )
 
 @bughunter0.on_callback_query()
 async def cb_data(bot, update):  
     if update.data == "cbhelp":
         await update.message.edit_text(
             text=HELP,
-            reply_markup=HELP_BUTTONS,
+            reply_markup=CLOSE_BUTTON,
             disable_web_page_preview=True
         )
     elif update.data == "cbabout":
         await update.message.edit_text(
             text=ABOUT,
-            reply_markup=ABOUT_BUTTONS,
+            reply_markup=CLOSE_BUTTON,
             disable_web_page_preview=True
         )
     else:
