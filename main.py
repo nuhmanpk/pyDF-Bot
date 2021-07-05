@@ -95,7 +95,7 @@ async def pdf_to_text(bot, message):
      num_of_pages = pdf_reader.getNumPages()
      await txt.edit(f"Found {num_of_pages} Page")
      page_no = pdf_reader.getPage(0) # pageObject
-    " text_path = TXT_LOCATION + f"txt{message.chat.id}.txt"     
+    # text_path = TXT_LOCATION + f"txt{message.chat.id}.txt"     
      await txt.edit("Extracting Text from PDF...")
      for page in range (0,num_of_pages):
          os.open("bughunter0.txt",os.O_RDWR & os.O_APPEND)
