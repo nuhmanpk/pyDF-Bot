@@ -51,7 +51,7 @@ START_BUTTON = InlineKeyboardMarkup(
 @bughunter0.on_message(filters.command(["start"]))
 async def start(bot, update):
      await update.reply_text(
-        text=START_TEXT.format(update.from_user.mention),
+        text=START_STR.format(update.from_user.mention),
         disable_web_page_preview=True,
         reply_markup=START_BUTTON
     )
