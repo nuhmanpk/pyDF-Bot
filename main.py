@@ -89,7 +89,7 @@ async def pdf_to_text(bot, message):
      pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf"
      await message.reply_to_message.download(pdf_path)  
      pdf_reader = PyPDF2.PdfFileReader(pdf_path)
-     num_of_pages = pdf_reader.numPages()
+     num_of_pages = pdf_reader.getNumPages()
      page_no = pdf_reader.getPage(0)
      text_path = TXT_LOCATION + f"{message.chat.id}.txt"     
      for page in range (page_no,num_of_pages):
