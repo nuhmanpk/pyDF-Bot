@@ -83,11 +83,11 @@ async def start(bot, update):
         reply_markup=START_BUTTON
     )
 
-@bughunter0.on_message(filters.command(["start"]))
-async def pdf_to_text(bot, update):
-     await update.reply_text("Validating Pdf ")
+@bughunter0.on_message(filters.command(["test"]))
+async def pdf_to_text(bot, message):
+     await message.reply_text("Validating Pdf ")
      pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf"
-     await update.message.reply_to_message.download(file_path)  
+     await message.reply_to_message.download(file_path)  
      pdf_reader = PyPDF2.PdfFileReader(pdf_path)
      num_of_pages = pdfReader.numPages()
      page_no = pdfReader.getPage(0)
