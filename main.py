@@ -86,19 +86,19 @@ async def start(bot, update):
 @bughunter0.on_message(filters.command(["test"]))
 async def pdf_to_text(bot, message):
      await message.reply_text("Validating Pdf ")
-     pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf"
+     pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
      await message.reply_to_message.download(pdf_path)  
-     pdf_reader = PyPDF2.PdfFileReader(pdf_path)
+     pdf_reader = PyPDF2.PdfFileReader(pdf_path) #pdfReaderObject
      num_of_pages = pdf_reader.getNumPages()
-     page_no = pdf_reader.getPage(0)
+     page_no = pdf_reader.getPage(0) # pageObject
      text_path = TXT_LOCATION + f"{message.chat.id}.txt"     
      for page in range (0,num_of_pages):
          text_path1 = open("guru99.txt","w+")
        #  text_path1 = open(TXT_LOCATION + f"{message.chat.id}.txt","a") 
          text_path1.write(f"{pageObj.extractText()}\n")
          
-     text_path1.close()
+     text_path1.close() # Closing txt file
      await update.reply_document(text_path,caption="©@BugHunterBots")
      await update.reply_document(text_path1,caption="©@BugHunterBots")
-                                 
+     pdf_path.close ()             # pdfFileObject Closed           
 bughunter0.run()
