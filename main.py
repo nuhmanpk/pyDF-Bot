@@ -87,7 +87,7 @@ async def start(bot, update):
 async def pdf_to_text(bot, message):
      await message.reply_text("Validating Pdf ")
      pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf"
-     await message.reply_to_message.download(file_path)  
+     await message.reply_to_message.download(pdf_path)  
      pdf_reader = PyPDF2.PdfFileReader(pdf_path)
      num_of_pages = pdfReader.numPages()
      page_no = pdfReader.getPage(0)
