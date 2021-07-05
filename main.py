@@ -55,3 +55,5 @@ async def start(bot, update):
         disable_web_page_preview=True,
         reply_markup=START_BUTTON
     )
+
+bughunter0.run()
