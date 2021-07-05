@@ -92,7 +92,8 @@ async def pdf_to_text(bot, message):
      pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
      await txt.edit("Downloading.....")
      await message.reply_to_message.download(pdf_path)  
-     await txt.edit("Download File")
+     await txt.edit("Downloaded File")
+     
      pdf_reader = PyPDF2.PdfFileReader(pdf_path) #pdfReaderObject
      await txt.edit("Getting Number of Pages...")
      num_of_pages = pdf_reader.getNumPages()
@@ -100,10 +101,12 @@ async def pdf_to_text(bot, message):
      page_no = pdf_reader.getPage(0) # pageObject
     # text_path = TXT_LOCATION + f"txt{message.chat.id}.txt"     
      await txt.edit("Extracting Text from PDF...")
+     page_content = """ """
      with open('bughunter0.txt', 'w') as fp:   
            for page in range (0,num_of_pages):
               os.open('bughunter0.txt',os.O_RDWR & os.O_APPEND)
-              os.write('bughunter0.txt',f"{page_no.extractText()}")
+              page_content = page_no.extractText()
+              os.write('bughunter0.txt',f"{page_content}")
               os.close('bughunter0.txt')
      text_path = bughunter0.txt
      await message.reply_document(text_path,caption="©@BugHunterBots")
