@@ -7,6 +7,7 @@ import os
 from os import error
 import logging
 import pyrogram
+import PyPDF2
 from decouple import config
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
@@ -34,6 +35,8 @@ HELP = """
 No one gonna Help You !!
 """
 
+DOWNLOAD_LOCATION = os.environ.get("DOWNLOAD_LOCATION", "./DOWNLOADS/PyDF/")
+TXT_LOCATION =  os.environ.get("TXT_LOCATION", "./DOWNLOADS/txt/")
 
 START_BUTTON = InlineKeyboardMarkup(
         [[
@@ -80,4 +83,21 @@ async def start(bot, update):
         reply_markup=START_BUTTON
     )
 
+@bughunter0.on_message(filters.command(["start"]))
+async def pdf_to_text(bot, update):
+     await update.reply_text("Validating Pdf ")
+     pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf"
+     await update.message.reply_to_message.download(file_path)  
+     pdf_reader = PyPDF2.PdfFileReader(pdf_path)
+     num_of_pages = pdfReader.numPages()
+     page_no = pdfReader.getPage(0)
+     text_path = TXT_LOCATION + f"{message.chat.id}.txt"     
+     for page in range (page_no,num_of_pages):
+         text_path1 = open(TXT_LOCATION + f"{message.chat.id}.txt","a") 
+         text_path1.write(f"{pageObj.extractText()}\n")
+         
+     text_path1.close()
+     await update.reply_document(text_path,caption="©@BugHunterBots")
+     await update.reply_document(text_path1,caption="©@BugHunterBots")
+                                 
 bughunter0.run()
