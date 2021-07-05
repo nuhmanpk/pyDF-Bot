@@ -98,7 +98,7 @@ async def pdf_to_text(bot, message):
          text_path1.write(f"{page_no.extractText()}\n")
          
      text_path1.close() # Closing txt file
-     await update.reply_document(text_path,caption="©@BugHunterBots")
-     await update.reply_document(text_path1,caption="©@BugHunterBots")
+     await message.reply_document(text_path,caption="©@BugHunterBots")
+     await message.reply_document(text_path1,caption="©@BugHunterBots")
      pdf_path.close ()             # pdfFileObject Closed           
 bughunter0.run()
