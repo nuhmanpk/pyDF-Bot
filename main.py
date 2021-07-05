@@ -85,23 +85,26 @@ async def start(bot, update):
 
 @bughunter0.on_message(filters.command(["test"]))
 async def pdf_to_text(bot, message):
-     await message.reply_text("Validating Pdf ")
+     txt =await message.reply_text("Validating Pdf ")
      pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
+     await txt.edit("Downloading.....")
      await message.reply_to_message.download(pdf_path)  
+     await txt.edit("Download File")
      pdf_reader = PyPDF2.PdfFileReader(pdf_path) #pdfReaderObject
+     await txt.edit("Getting Number of Pages...")
      num_of_pages = pdf_reader.getNumPages()
-     await message.reply_document(pdf_path,caption="©@BugHunterBots")
-   
+     await txt.edit(f"Found {num_of_pages} Page")
      page_no = pdf_reader.getPage(0) # pageObject
      text_path = TXT_LOCATION + f"{message.chat.id}.txt"     
+     await txt.edit("Extracting Text from PDF...")
      for page in range (0,num_of_pages):
          os.open(text_path,os.O_RDWR & os.O_APPEND)
          os.write(text_path,f"{page_no.extractText()}")
          os.close(text_path)
      await message.reply_document(text_path,caption="©@BugHunterBots")
-     await message.reply_document(text_path1,caption="©@BugHunterBots")
+   #  await message.reply_document(text_path1,caption="©@BugHunterBots")
      pdf_path.close ()             # pdfFileObject Closed  
      os.remove(pdf_path)
      os.remove(text_path)    
-     os.remove(text_path1)     
+          
 bughunter0.run()
