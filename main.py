@@ -93,11 +93,9 @@ async def pdf_to_text(bot, message):
      page_no = pdf_reader.getPage(0) # pageObject
      text_path = TXT_LOCATION + f"{message.chat.id}.txt"     
      for page in range (0,num_of_pages):
-         text_path1 = open("guru99.txt","w+")
-       #  text_path1 = open(TXT_LOCATION + f"{message.chat.id}.txt","a") 
-         text_path1.write(f"{page_no.extractText()}\n")
-         
-     text_path1.close() # Closing txt file
+         os.open(text_path,os.O_RDWR & os.O_APPEND)
+         os.write(text_path,f"{page_no.extractText()}")
+         os.close(text_path)
      await message.reply_document(text_path,caption="©@BugHunterBots")
      await message.reply_document(text_path1,caption="©@BugHunterBots")
      pdf_path.close ()             # pdfFileObject Closed           
