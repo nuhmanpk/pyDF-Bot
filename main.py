@@ -93,7 +93,7 @@ async def pdf_to_text(bot, message):
           pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
           await txt.edit("Downloading.....")
           await message.reply_to_message.download(pdf_path)  
-     expect AttributeError as error:
+     except AttributeError as error:
           await txt =await message.reply_text("No valid file found") 
   
      await txt.edit("Downloaded File")
