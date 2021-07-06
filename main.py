@@ -93,34 +93,34 @@ async def pdf_to_text(bot, message):
           pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
           await txt.edit("Downloading.....")
           await message.reply_to_message.download(pdf_path)  
-     except AttributeError as error:
-          txt =await message.reply_text("No valid file found") 
-  
-     await txt.edit("Downloaded File")
-     pdf = open(pdf_path,'rb')
-     pdf_reader = PyPDF2.PdfFileReader(pdf) #pdfReaderObject
-     await txt.edit("Getting Number of Pages....")
-     num_of_pages = pdf_reader.getNumPages()
-     await txt.edit(f"Found {num_of_pages} Page")
-     page_no = pdf_reader.getPage(0) # pageObject
-    # text_path = TXT_LOCATION + f"txt{message.chat.id}.txt"     
-     await txt.edit("Extracting Text from PDF...")
-     page_content = "" # EmptyString
-     with open('bughunter0.txt', 'w') as fp:   
-           for page in range (0,num_of_pages):
-              os.open('bughunter0.txt',os.O_RDWR & os.O_APPEND)
-              page_content = str(int(page_no.extractText()))
-           #  print (page_content)
-              await message.reply_text(f"{page_content} This is what i Found")
-              os.write('bughunter0.txt',page_content)
-              os.close('bughunter0.txt')
-     text_path = bughunter0.txt
-     await message.reply_document(text_path,caption="©@BugHunterBots")
-   #  await message.reply_document(text_path1,caption="©@BugHunterBots")
-     pdf_path.close ()             # pdfFileObject Closed  
-     os.remove(pdf_path)
-     os.remove(text_path)    
-  
+          await txt.edit("Downloaded File")
+          pdf = open(pdf_path,'rb')
+          pdf_reader = PyPDF2.PdfFileReader(pdf) #pdfReaderObject
+          await txt.edit("Getting Number of Pages....")
+          num_of_pages = pdf_reader.getNumPages()
+          await txt.edit(f"Found {num_of_pages} Page")
+          page_no = pdf_reader.getPage(0) # pageObject
+        # text_path = TXT_LOCATION + f"txt{message.chat.id}.txt"     
+          await txt.edit("Extracting Text from PDF...")
+          page_content = "" # EmptyString
+          with open('bughunter0.txt', 'w') as fp:   
+                for page in range (0,num_of_pages):
+                    os.open('bughunter0.txt',os.O_RDWR & os.O_APPEND)
+                    page_content = str(int(page_no.extractText()))
+                  # print (page_content)
+                    await message.reply_text(f"{page_content} This is what i Found")
+                    os.write('bughunter0.txt',page_content)
+                    os.close('bughunter0.txt')
+          text_path = bughunter0.txt
+          await message.reply_document(text_path,caption="©@BugHunterBots")
+        # await message.reply_document(text_path1,caption="©@BugHunterBots")
+          pdf_path.close ()             # pdfFileObject Closed  
+          os.remove(pdf_path)
+          os.remove(text_path)    
+     except ValueError as error :
+          tx = await message.reply_text("Oops.. An Error occurred")
+
+
 @bughunter0.on_message(filters.command(["clear"]))
 async def clear(bot, message):
      tx =await message.reply_text("Validating Pdf ")        
