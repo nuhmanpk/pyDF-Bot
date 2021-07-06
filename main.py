@@ -93,7 +93,7 @@ async def pdf_to_text(bot, message):
      await txt.edit("Downloading.....")
      await message.reply_to_message.download(pdf_path)  
      await txt.edit("Downloaded File")
-     
+     os.open(pdf_path,'rb')
      pdf_reader = PyPDF2.PdfFileReader(pdf_path) #pdfReaderObject
      await txt.edit("Getting Number of Pages...")
      num_of_pages = pdf_reader.getNumPages()
