@@ -88,10 +88,14 @@ async def start(bot, update):
 
 @bughunter0.on_message(filters.command(["test"]))
 async def pdf_to_text(bot, message):
-     txt =await message.reply_text("Validating Pdf ")
-     pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
-     await txt.edit("Downloading.....")
-     await message.reply_to_message.download(pdf_path)  
+     try :
+          txt =await message.reply_text("Validating Pdf ")
+          pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
+          await txt.edit("Downloading.....")
+          await message.reply_to_message.download(pdf_path)  
+     Expect AttributeError as error :
+          await txt =await message.reply_text("No valid file found") 
+  
      await txt.edit("Downloaded File")
      pdf = open(pdf_path,'rb')
      pdf_reader = PyPDF2.PdfFileReader(pdf) #pdfReaderObject
