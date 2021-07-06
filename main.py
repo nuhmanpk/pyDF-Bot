@@ -105,7 +105,7 @@ async def pdf_to_text(bot, message):
      with open('bughunter0.txt', 'w') as fp:   
            for page in range (0,num_of_pages):
               os.open('bughunter0.txt',os.O_RDWR & os.O_APPEND)
-              page_content = int(str(page_no.extractText()))
+              page_content = str(int(page_no.extractText()))
            #  print (page_content)
               await message.reply_text(f"{page_content} This is what i Found")
               os.write('bughunter0.txt',page_content)
@@ -116,5 +116,11 @@ async def pdf_to_text(bot, message):
      pdf_path.close ()             # pdfFileObject Closed  
      os.remove(pdf_path)
      os.remove(text_path)    
-          
+  
+@bughunter0.on_message(filters.command(["clear"]))
+async def clear(bot, message):
+     tx =await message.reply_text("Validating Pdf ")        
+     os.remove(pdf_path)
+     os.remove(text_path)
+     await tx.edit("Cleared")
 bughunter0.run()
