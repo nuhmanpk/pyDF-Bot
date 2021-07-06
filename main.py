@@ -4,7 +4,7 @@
 # Copyright - https://en.m.wikipedia.org/wiki/Fair_use
 
 import os 
-from os import error
+from os import error, system, name
 import logging
 import pyrogram
 import PyPDF2
@@ -105,7 +105,7 @@ async def pdf_to_text(bot, message):
      with open('bughunter0.txt', 'w') as fp:   
            for page in range (0,num_of_pages):
               os.open('bughunter0.txt',os.O_RDWR & os.O_APPEND)
-              page_content = str(page_no.extractText())
+              page_content = chr(page_no.extractText())
               os.write('bughunter0.txt',page_content)
               os.close('bughunter0.txt')
      text_path = bughunter0.txt
