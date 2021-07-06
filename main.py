@@ -94,7 +94,7 @@ async def pdf_to_text(bot, message):
           await txt.edit("Downloading.....")
           await message.reply_to_message.download(pdf_path)  
      except AttributeError as error:
-          await txt =await message.reply_text("No valid file found") 
+          txt =await message.reply_text("No valid file found") 
   
      await txt.edit("Downloaded File")
      pdf = open(pdf_path,'rb')
