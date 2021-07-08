@@ -135,7 +135,7 @@ async def clear(bot, message):
          await txt.edit("Getting Number of Pages....")
          num_of_pages = pdf_reader.getNumPages()
          await txt.edit(f"Found {num_of_pages} Page")
-         await txt.edit(Getting PDF info..)
+         await txt.edit("Getting PDF info..")
          info = pdf_reader.getDocumentInfo()
          await txt.edit(f"**author :** {info.author}
                           **creator :** {info.creator}
