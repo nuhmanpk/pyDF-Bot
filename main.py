@@ -37,7 +37,7 @@ No one gonna Help You !!
 
 DOWNLOAD_LOCATION = os.environ.get("DOWNLOAD_LOCATION", "./DOWNLOADS/PyDF/")
 # TXT_LOCATION =  os.environ.get("TXT_LOCATION", "./DOWNLOADS/txt/")
-path = './DOWNLOADS/txt/'
+path = './DOWNLOADS/txt/bughunter0.txt'
 
   
 
@@ -88,7 +88,7 @@ async def start(bot, update):
 
 @bughunter0.on_message(filters.command(["test"])) # PdfToText NoT Working!!
 async def pdf_to_text(bot, message):
-     try :
+   #  try :
           txt =await message.reply_text("Validating Pdf ")
           pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
           await txt.edit("Downloading.....")
@@ -119,7 +119,7 @@ async def pdf_to_text(bot, message):
           pdf_path.close ()             # pdfFileObject Closed  
           os.remove(pdf_path)
           os.remove(text_path)    
-     except ValueError as error :
+   #  except ValueError as error :
           await txt.delete()
           os.remove(pdf_path)
           os.remove(text_path)    
