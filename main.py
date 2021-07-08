@@ -102,7 +102,8 @@ async def pdf_to_text(bot, message):
           page_no = pdf_reader.getPage(0) # pageObject
         # text_path = TXT_LOCATION + f"txt{message.chat.id}.txt"     
           await txt.edit("Extracting Text from PDF...")
-          page_content = "" # EmptyString
+          page_content = f"""{page_no.extractText}""" # EmptyString
+          await txt.edit(f"This is what i found\n{page_content}")
           with open('bughunter0.txt', 'w') as fp:   
                 for page in range (0,num_of_pages):
                     os.open('bughunter0.txt',os.O_RDWR & os.O_APPEND)
@@ -137,12 +138,13 @@ async def clear(bot, message):
          await txt.edit(f"Found {num_of_pages} Page")
          await txt.edit("Getting PDF info..")
          info = pdf_reader.getDocumentInfo()
-         await txt.edit(f"""**author :** {info.author}
-                          **creator :** {info.creator}
-                          **producer :** {info.producer}
-                          **subject :** {info.subject}
-                          **title :** {info.title}
-                          **Pages :** {num_of_pages}""")
+         await txt.edit(f"""
+**author :** {info.author}
+**creator :** {info.creator}
+**producer :** {info.producer}
+**subject :** {info.subject}
+**title :** {info.title}
+**Pages :** {num_of_pages}""")
 
          os.remove(pdf_path)
      except Exception as error :
