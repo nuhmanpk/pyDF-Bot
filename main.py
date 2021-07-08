@@ -137,12 +137,12 @@ async def clear(bot, message):
          await txt.edit(f"Found {num_of_pages} Page")
          await txt.edit(Getting PDF info..)
          info = pdf_reader.getDocumentInfo()
-         await txt.edit(f("**author :** {info.author}
+         await txt.edit(f"**author :** {info.author}
                           **creator :** {info.creator}
                           **producer :** {info.producer}
                           **subject :** {info.subject}
                           **title :** {info.title}
-                          **Pages :** {num_of_pages}"))
+                          **Pages :** {num_of_pages}")
 
          os.remove(pdf_path)
      except Exception as error :
