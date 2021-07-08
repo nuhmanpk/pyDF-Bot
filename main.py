@@ -57,7 +57,7 @@ CLOSE_BUTTON = InlineKeyboardMarkup(
         ]]
     )
 
-@bughunter0.on_callback_query()
+@bughunter0.on_callback_query() # callbackQuery()
 async def cb_data(bot, update):  
     if update.data == "cbhelp":
         await update.message.edit_text(
@@ -78,7 +78,7 @@ async def cb_data(bot, update):
             reply_markup=START_BUTTON
         )
 
-@bughunter0.on_message(filters.command(["start"]))
+@bughunter0.on_message(filters.command(["start"])) # StartCommand
 async def start(bot, update):
      await update.reply_text(
         text=START_STR.format(update.from_user.mention),
@@ -86,7 +86,7 @@ async def start(bot, update):
         reply_markup=START_BUTTON
     )
 
-@bughunter0.on_message(filters.command(["test"]))
+@bughunter0.on_message(filters.command(["test"])) # PdfToText NoT Working!!
 async def pdf_to_text(bot, message):
      try :
           txt =await message.reply_text("Validating Pdf ")
@@ -118,13 +118,35 @@ async def pdf_to_text(bot, message):
           os.remove(pdf_path)
           os.remove(text_path)    
      except ValueError as error :
-          tx = await message.reply_text("Oops.. An Error occurred")
-
-
-@bughunter0.on_message(filters.command(["clear"]))
+          await txt.delete()
+          os.remove(pdf_path)
+          os.remove(text_path)    
+          tx = await message.reply_text("Oops !!! Something Wrong occurred")
+@bughunter0.on_message(filters.command(["info"]))
 async def clear(bot, message):
-     tx =await message.reply_text("Validating Pdf ")        
-     os.remove(pdf_path)
-     os.remove(text_path)
-     await tx.edit("Cleared")
+     try:
+         tx =await message.reply_text("Validating Pdf ")  
+         pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
+         await txt.edit("Downloading.....")
+         await message.reply_to_message.download(pdf_path)  
+         await txt.edit("Downloaded File")
+         pdf = open(pdf_path,'rb')
+         pdf_reader = PyPDF2.PdfFileReader(pdf) #pdfReaderObject
+         await txt.edit("Getting Number of Pages....")
+         num_of_pages = pdf_reader.getNumPages()
+         await txt.edit(f"Found {num_of_pages} Page")
+         await txt.edit(Getting PDF info..)
+         info = pdf_reader.getDocumentInfo()
+         await txt.edit(f("**author :** {info.author}
+                          **creator :** {info.creator}
+                          **producer :** {info.producer}
+                          **subject :** {info.subject}
+                          **title :** {info.title}
+                          **Pages :** {num_of_pages}"))
+
+         os.remove(pdf_path)
+     except Exception as error :
+         await message.reply_text("Oops , error")
+
+
 bughunter0.run()
