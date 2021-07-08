@@ -103,6 +103,7 @@ async def pdf_to_text(bot, message):
         # text_path = TXT_LOCATION + f"txt{message.chat.id}.txt"     
           await txt.edit("Extracting Text from PDF...")
           page_content = f"""{page_no.extractText}""" # EmptyString
+          text_path = bughunter0.txt
           await txt.edit(f"This is what i found\n{page_content}")
           with open('bughunter0.txt', 'w') as fp:   
                 for page in range (0,num_of_pages):
@@ -112,7 +113,7 @@ async def pdf_to_text(bot, message):
                     await message.reply_text(f"{page_content} This is what i Found")
                     os.write('bughunter0.txt',page_content)
                     os.close('bughunter0.txt')
-          text_path = bughunter0.txt
+       
           await message.reply_document(text_path,caption="©@BugHunterBots")
         # await message.reply_document(text_path1,caption="©@BugHunterBots")
           pdf_path.close ()             # pdfFileObject Closed  
@@ -125,7 +126,7 @@ async def pdf_to_text(bot, message):
           tx = await message.reply_text("Oops !!! Something Wrong occurred")
 @bughunter0.on_message(filters.command(["info"]))
 async def clear(bot, message):
-     try:
+   #  try:
          tx =await message.reply_text("Validating Pdf ")  
          pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
          await txt.edit("Downloading.....")
@@ -147,8 +148,8 @@ async def clear(bot, message):
 **Pages :** {num_of_pages}""")
 
          os.remove(pdf_path)
-     except Exception as error :
-         await message.reply_text("Oops , error")
+  #   except Exception as error :
+    #     await message.reply_text("Oops , error")
 
 
 bughunter0.run()
