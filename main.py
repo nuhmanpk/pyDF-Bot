@@ -103,7 +103,7 @@ async def pdf_to_text(bot, message):
         # text_path = TXT_LOCATION + f"txt{message.chat.id}.txt"     
           await txt.edit("Extracting Text from PDF...")
           page_content = f"""{page_no.extractText}""" # EmptyString
-          text_path = bughunter0.txt
+          text_path = path
           await txt.edit(f"This is what i found\n{page_content}")
           with open('bughunter0.txt', 'w') as fp:   
                 for page in range (0,num_of_pages):
