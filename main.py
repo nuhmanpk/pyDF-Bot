@@ -103,18 +103,16 @@ async def pdf_to_text(bot, message):
           page_no = pdf_reader.getPage(0) # pageObject
         # text_path = TXT_LOCATION + f"txt{message.chat.id}.txt"     
           await txt.edit("Extracting Text from PDF...")
-          print(page_no.extractText())
-          time.sleep(10)
-          page_content = f"""{page_no.extractText()}""" # EmptyString
+       #   print(page_no.extractText())
+       #   time.sleep(10)
+          page_content = """ """ # EmptyString
           text_path = path
       #    await txt.edit(f"This is what i found\n{page_content}")
           with open('bughunter0.txt', 'w') as fp:   
                 for page in range (0,num_of_pages):
                     os.open('bughunter0.txt',os.O_RDWR & os.O_APPEND)
-                    page_content = page_no.extractText()
-                    print (page_content)
-                    time.sleep(10)
-                    await message.reply_text(f"{page_content} This is what i Found")
+                    page_content = page_no.extractText()  
+                    await message.reply_text(f"{page_content} This is what i Found in Page {page}")
                     os.write('bughunter0.txt',page_content)
                     os.close('bughunter0.txt')
        
@@ -144,12 +142,12 @@ async def clear(bot, message):
          await txt.edit("Getting PDF info..")
          info = pdf_reader.getDocumentInfo()
          await txt.edit(f"""
-**author :** {info.author}
-**creator :** {info.creator}
-**producer :** {info.producer}
-**subject :** {info.subject}
-**title :** {info.title}
-**Pages :** {num_of_pages}""")
+**Author :** `{info.author}`
+**Creator :** `{info.creator}`
+**Producer :** `{info.producer}`
+**Subject :** `{info.subject}`
+**Title :** `{info.title}`
+**Pages :** `{num_of_pages}`""")
 
          os.remove(pdf_path)
   #   except Exception as error :
