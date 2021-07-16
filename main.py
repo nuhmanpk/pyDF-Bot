@@ -111,7 +111,7 @@ async def pdf_to_text(bot, message):
           with open('bughunter0.txt', 'w') as text_path:   
                 for page in range (1,num_of_pages):
                     file_write = os.open('bughunter0.txt',os.O_RDWR & os.O_APPEND)
-                    page_content = str(page_no.extractText())
+                    page_content = page_no.extractText()
                     await message.reply_text(f"{page_content} \n This is what i Found in Page {page}")
                     write = os.write(file_write,f"{page_content}")
                     os.close(file_write)
