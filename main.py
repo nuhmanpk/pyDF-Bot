@@ -107,7 +107,7 @@ async def pdf_to_text(bot, message):
           time.sleep(10)
           page_content = f"""{page_no.extractText()}""" # EmptyString
           text_path = path
-          await txt.edit(f"This is what i found\n{page_content}")
+      #    await txt.edit(f"This is what i found\n{page_content}")
           with open('bughunter0.txt', 'w') as fp:   
                 for page in range (0,num_of_pages):
                     os.open('bughunter0.txt',os.O_RDWR & os.O_APPEND)
@@ -131,7 +131,7 @@ async def pdf_to_text(bot, message):
 @bughunter0.on_message(filters.command(["info"]))
 async def clear(bot, message):
    #  try:
-         tx =await message.reply_text("Validating Pdf ")  
+         txt =await message.reply_text("Validating Pdf ")  
          pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
          await txt.edit("Downloading.....")
          await message.reply_to_message.download(pdf_path)  
