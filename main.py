@@ -114,7 +114,7 @@ async def pdf_to_text(bot, message):
                     try: 
                         page_content = page_no.extractText()
                     except Exception as error:
-                        awaiy message.reply_text(f"Oops!! Error occurred while Extracting page number {page}")
+                        await message.reply_text(f"Oops!! Error occurred while Extracting page number {page}")
                     await message.reply_text(f"**Page Number : {page}**\n\n`{page_content} `\n @BugHunterBots")
                     page_no = pdf_reader.getPage(page) # Iteration of page number
             #        os.write(file_write,page_content)
