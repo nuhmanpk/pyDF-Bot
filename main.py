@@ -114,7 +114,7 @@ async def pdf_to_text(bot, message):
                     page_content = str(page_no.extractText())
                     await message.reply_text(f"{page_content} \n This is what i Found in Page {page}")
                #     os.write('bughunter0.txt',page_content)
-                    os.close('bughunter0.txt')
+               #     os.close('bughunter0.txt')
        
           await message.reply_document(text_path,caption="©@BugHunterBots")
         # await message.reply_document(text_path1,caption="©@BugHunterBots")
