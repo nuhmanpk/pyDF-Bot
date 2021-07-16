@@ -113,10 +113,10 @@ async def pdf_to_text(bot, message):
                     file_write = os.open('bughunter0.txt',os.O_RDWR & os.O_APPEND)
                     page_content = page_no.extractText()
                     await message.reply_text(f"{page_content} \n This is what i Found in Page {page}")
-                    os.write(file_write,page_content)
-                    os.close(file_write)
+               #     os.write(file_write,page_content)
+               #     os.close(file_write)
        
-          await message.reply_document(text_path,caption="©@BugHunterBots")
+        # await message.reply_document(text_path,caption="©@BugHunterBots")
         # await message.reply_document(text_path1,caption="©@BugHunterBots")
           pdf_path.close ()             # pdfFileObject Closed  
           os.remove(pdf_path)
@@ -126,8 +126,9 @@ async def pdf_to_text(bot, message):
           os.remove(pdf_path)
           os.remove(text_path)    
           tx = await message.reply_text("Oops !!! Something Wrong occurred")
+
 @bughunter0.on_message(filters.command(["info"]))
-async def clear(bot, message):
+async def info(bot, message):
    #  try:
          txt =await message.reply_text("Validating Pdf ")  
          pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
