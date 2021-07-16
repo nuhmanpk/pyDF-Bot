@@ -16,7 +16,7 @@ from pyrogram.types import User, Message
 
     
 bughunter0 = Client(
-    "Sticker-Bot",
+    "PyDF-BOT",
     bot_token = os.environ["BOT_TOKEN"],
     api_id = int(os.environ["API_ID"]),
     api_hash = os.environ["API_HASH"]
@@ -113,7 +113,7 @@ async def pdf_to_text(bot, message):
                     file_write = os.open('bughunter0.txt',os.O_RDWR & os.O_APPEND)
                     page_content = page_no.extractText()
                     await message.reply_text(f"{page_content} \n This is what i Found in Page {page}")
-                    write = os.write(file_write,page_content)
+                    os.write(file_write,page_content)
                     os.close(file_write)
        
           await message.reply_document(text_path,caption="©@BugHunterBots")
