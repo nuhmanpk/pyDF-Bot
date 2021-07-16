@@ -114,8 +114,8 @@ async def pdf_to_text(bot, message):
                     page_content = page_no.extractText()
                     await message.reply_text(f"**Page Number : {page}**\n\n`{page_content} `\n @BugHunterBots")
                     page_no = pdf_reader.getPage(page) # Iteration of page number
-                    os.write(file_write,page_content)
-                    os.close(file_write)
+            #        os.write(file_write,page_content)
+            #        os.close(file_write)
        
           await message.reply_document(text_path,caption="©@BugHunterBots")
         # await message.reply_document(text_path1,caption="©@BugHunterBots")
