@@ -113,7 +113,7 @@ async def pdf_to_text(bot, message):
                     file_write = os.open('bughunter0.txt',os.O_RDWR & os.O_APPEND)
                     page_content = page_no.extractText()
                     await message.reply_text(f"{page_content} \n This is what i Found in Page {page}")
-                    page_no = page_no+1
+                    page_no = pdf_reader.getPage(page) # Iteration of page number
                #     os.write(file_write,page_content)
                #     os.close(file_write)
        
