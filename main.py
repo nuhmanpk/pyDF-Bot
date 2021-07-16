@@ -100,7 +100,7 @@ async def pdf_to_text(bot, message):
           await txt.edit("Getting Number of Pages....")
           num_of_pages = pdf_reader.getNumPages()
           await txt.edit(f"Found {num_of_pages} Page")
-          page_no = pdf_reader.getPage(1) # pageObject
+          page_no = pdf_reader.getPage(0) # pageObject
        #   text_path = TXT_LOCATION + f"txt{message.chat.id}.txt"     
           await txt.edit("Extracting Text from PDF...")
        #   print(page_no.extractText())
@@ -113,6 +113,7 @@ async def pdf_to_text(bot, message):
                     file_write = os.open('bughunter0.txt',os.O_RDWR & os.O_APPEND)
                     page_content = page_no.extractText()
                     await message.reply_text(f"{page_content} \n This is what i Found in Page {page}")
+                    page_no = page_no+1
                #     os.write(file_write,page_content)
                #     os.close(file_write)
        
