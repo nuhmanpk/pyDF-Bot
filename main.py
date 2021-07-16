@@ -8,6 +8,7 @@ from os import error, system, name
 import logging
 import pyrogram
 import PyPDF2
+import time
 from decouple import config
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
@@ -102,14 +103,17 @@ async def pdf_to_text(bot, message):
           page_no = pdf_reader.getPage(0) # pageObject
         # text_path = TXT_LOCATION + f"txt{message.chat.id}.txt"     
           await txt.edit("Extracting Text from PDF...")
-          page_content = f"""{page_no.extractText}""" # EmptyString
+          print(page_no.extractText())
+          time.sleep(10)
+          page_content = f"""{page_no.extractText()}""" # EmptyString
           text_path = path
           await txt.edit(f"This is what i found\n{page_content}")
           with open('bughunter0.txt', 'w') as fp:   
                 for page in range (0,num_of_pages):
                     os.open('bughunter0.txt',os.O_RDWR & os.O_APPEND)
-                    page_content = str(int(page_no.extractText()))
-                  # print (page_content)
+                    page_content = page_no.extractText()
+                    print (page_content)
+                    time.sleep(10)
                     await message.reply_text(f"{page_content} This is what i Found")
                     os.write('bughunter0.txt',page_content)
                     os.close('bughunter0.txt')
