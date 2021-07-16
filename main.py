@@ -112,12 +112,12 @@ async def pdf_to_text(bot, message):
                 for page in range (1,num_of_pages):
                     file_write = os.open('bughunter0.txt',os.O_RDWR & os.O_APPEND)
                     page_content = page_no.extractText()
-                    await message.reply_text(f"{page_content} \n This is what i Found in Page {page}")
+                    await message.reply_text(f"**Page Number : {page}**\n\n`{page_content} `\n @BugHunterBots")
                     page_no = pdf_reader.getPage(page) # Iteration of page number
-               #     os.write(file_write,page_content)
-               #     os.close(file_write)
+                    os.write(file_write,page_content)
+                    os.close(file_write)
        
-        # await message.reply_document(text_path,caption="©@BugHunterBots")
+          await message.reply_document(text_path,caption="©@BugHunterBots")
         # await message.reply_document(text_path1,caption="©@BugHunterBots")
           pdf_path.close ()             # pdfFileObject Closed  
           os.remove(pdf_path)
