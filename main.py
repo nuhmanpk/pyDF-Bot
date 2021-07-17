@@ -109,7 +109,7 @@ async def pdf_to_text(bot, message):
           
        #   await txt.edit(f"This is what i found \n {page_content}")
           with open('bughunter0.txt', 'w') as text_path:   
-                for page in range (1,num_of_pages+1):
+                for page in range (0,num_of_pages):
                     file_write = open('bughunter0.txt','a')
                   # try: 
                     page_no = pdf_reader.getPage(page) # Iteration of page number
