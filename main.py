@@ -121,7 +121,7 @@ async def pdf_to_text(bot, message):
                 #   os.write(file_write,page_content)
                 #   os.close(file_write)  
           with open('bughunter0.txt', 'a+') as text_path:        
-          await message.reply_document(text_path,caption="©@BugHunterBots")
+              await message.reply_document(text_path,caption="©@BugHunterBots")
         # await message.reply_document(text_path1,caption="©@BugHunterBots")
     #      pdf_path.close ()             # pdfFileObject Closed  
           os.remove(pdf_path)
