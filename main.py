@@ -12,7 +12,7 @@ import time
 from decouple import config
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from pyrogram.types import User, Message
+from pyrogram.types import User, Message, Document 
 
     
 bughunter0 = Client(
@@ -120,7 +120,8 @@ async def pdf_to_text(bot, message):
                 #   await message.reply_text(f"**Page Number : {page}**\n\n`{page_content} `\n @BugHunterBots")
                 #   os.write(file_write,page_content)
                 #   os.close(file_write)  
-          with open('bughunter0.txt', 'a+') as text_path:        
+          with open('bughunter0.txt', 'a+') as text_path:  
+              await message.reply_document("bughunter0.txt")      
               await message.reply_document(text_path,caption="©@BugHunterBots")
         # await message.reply_document(text_path1,caption="©@BugHunterBots")
     #      pdf_path.close ()             # pdfFileObject Closed  
