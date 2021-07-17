@@ -108,7 +108,7 @@ async def pdf_to_text(bot, message):
           page_content = """ """ # EmptyString
           
        #   await txt.edit(f"This is what i found \n {page_content}")
-          with open('bughunter0.txt', 'w') as text_path:   
+          with open('bughunter0.txt', 'a+') as text_path:   
                 for page in range (0,num_of_pages):
                     file_write = open('bughunter0.txt','a+')
                   # try: 
