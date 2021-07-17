@@ -119,9 +119,8 @@ async def pdf_to_text(bot, message):
                 #   await message.reply_text(f"Oops!! Error occurred while Extracting page number {page}")
                 #   await message.reply_text(f"**Page Number : {page}**\n\n`{page_content} `\n @BugHunterBots")
                 #   os.write(file_write,page_content)
-                #   os.close(file_write)
-       
-          await message.reply_document(text_path,caption="©@BugHunterBots")
+                #   os.close(file_write)       
+            await message.reply_document(text_path,caption="©@BugHunterBots")
         # await message.reply_document(text_path1,caption="©@BugHunterBots")
     #      pdf_path.close ()             # pdfFileObject Closed  
           os.remove(pdf_path)
