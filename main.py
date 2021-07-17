@@ -110,12 +110,13 @@ async def pdf_to_text(bot, message):
        #   await txt.edit(f"This is what i found \n {page_content}")
           with open('bughunter0.txt', 'w') as text_path:   
                 for page in range (1,num_of_pages+1):
-                    file_write = os.open('bughunter0.txt',os.O_RDWR & os.O_APPEND)
-                    try: 
-                        page_content = page_no.extractText()
-                    except Exception as error:
-                        await message.reply_text(f"Oops!! Error occurred while Extracting page number {page}")
-                    await message.reply_text(f"**Page Number : {page}**\n\n`{page_content} `\n @BugHunterBots")
+                    file_write = os.open('bughunter0.txt','a')
+                  # try: 
+                    page_content = page_no.extractText()
+                    file_write.write(f"Page Number{page}   \n {page_content} BugHunterBots")   
+                 #  except Exception as error:
+                #   await message.reply_text(f"Oops!! Error occurred while Extracting page number {page}")
+                #   await message.reply_text(f"**Page Number : {page}**\n\n`{page_content} `\n @BugHunterBots")
                     page_no = pdf_reader.getPage(page) # Iteration of page number
             #        os.write(file_write,page_content)
             #        os.close(file_write)
@@ -124,12 +125,13 @@ async def pdf_to_text(bot, message):
         # await message.reply_document(text_path1,caption="©@BugHunterBots")
     #      pdf_path.close ()             # pdfFileObject Closed  
           os.remove(pdf_path)
-          os.remove(text_path)    
+          os.remove(text_path)  
+          os.remove('bughunter0.txt')  
    #  except ValueError as error :
-          await txt.delete()
-          os.remove(pdf_path)
-          os.remove(text_path)    
-          tx = await message.reply_text("Oops !!! Something Wrong occurred")
+     #     await txt.delete()
+     #     os.remove(pdf_path)
+    #      os.remove(text_path)    
+    #      tx = await message.reply_text("Oops !!! Something Wrong occurred")
 
 @bughunter0.on_message(filters.command(["info"]))
 async def info(bot, message):
