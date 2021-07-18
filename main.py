@@ -90,46 +90,46 @@ async def start(bot, update):
 @bughunter0.on_message(filters.command(["test"])) # PdfToText NoT Working!!
 async def pdf_to_text(bot, message):
       try :
-          txt =await message.reply_text("Validating Pdf ")
-          pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
+           txt =await message.reply_text("Validating Pdf ")
+           pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
           await txt.edit("Downloading.....")
-          try :
-               await message.reply_to_message.download(pdf_path)  
-               await txt.edit("Downloaded File")
-          except ValueError as error :
-               await message.reply_text(f"{error}")
-               await txt.delete()
-          try : 
-               pdf = open(pdf_path,'rb')
-               pdf_reader = PyPDF2.PdfFileReader(pdf) #pdfReaderObject
-               await txt.edit("Getting Number of Pages....")
-               num_of_pages = pdf_reader.getNumPages()
-               await txt.edit(f"Found {num_of_pages} Page")
-               page_no = pdf_reader.getPage(0) # pageObject
-               await txt.edit("Extracting Text from PDF...")
-               page_content = """ """ # EmptyString   
-          except Exception as error:
-               await message.reply_text("Doesn't seems like a valid PDF File 😣")   
-               await txt.delete()
-          with open(f'{message.chat.id}.txt', 'a+') as text_path:   
-                for page in range (0,num_of_pages):
-                    file_write = open(f'{message.chat.id}.txt','a+')
-                    try: 
-                        page_no = pdf_reader.getPage(page) # Iteration of page number
-                        page_content = page_no.extractText()
-                        file_write.write(f"page number - {page}")
-                        file_write.write(f" {page_content} ")   
-                        file_write.write(f"© BugHunterBots")
-                     #  await message.reply_text(f"**Page Number  :  {page}  **\n\n  ` {page_content} `\n     @BugHunterBots\n\n") # Use this Line of code to get Pdf Text as Messages
-                    except Exception as error:
-                        print (error)
-                        await message.reply_text("Oops Error Occurred!!")
-                        await txt.delete()
-          with open(f'{message.chat.id}.txt', 'a+') as text_path:  
-              await message.reply_document(f"{message.chat.id}.txt",caption="©@BugHunterBots")      
+            try :
+                 await message.reply_to_message.download(pdf_path)  
+                 await txt.edit("Downloaded File")
+            except ValueError as error :
+                 await message.reply_text(f"{error}")
+                 await txt.delete()
+              try : 
+                   pdf = open(pdf_path,'rb')
+                   pdf_reader = PyPDF2.PdfFileReader(pdf) #pdfReaderObject
+                   await txt.edit("Getting Number of Pages....")
+                   num_of_pages = pdf_reader.getNumPages()
+                   await txt.edit(f"Found {num_of_pages} Page")
+                   page_no = pdf_reader.getPage(0) # pageObject
+                   await txt.edit("Extracting Text from PDF...")
+                   page_content = """ """ # EmptyString   
+              except Exception as error:
+                   await message.reply_text("Doesn't seems like a valid PDF File 😣")   
+                   await txt.delete()
+              with open(f'{message.chat.id}.txt', 'a+') as text_path:   
+                   for page in range (0,num_of_pages):
+                        file_write = open(f'{message.chat.id}.txt','a+')
+                        try: 
+                            page_no = pdf_reader.getPage(page) # Iteration of page number
+                            page_content = page_no.extractText()
+                            file_write.write(f"page number - {page}")
+                            file_write.write(f" {page_content} ")   
+                            file_write.write(f"© BugHunterBots")
+                         #  await message.reply_text(f"**Page Number  :  {page}  **\n\n  ` {page_content} `\n     @BugHunterBots\n\n") # Use this Line of code to get Pdf Text as Messages
+                        except Exception as error:
+                            print (error)
+                            await message.reply_text("Oops Error Occurred!!")
+                            await txt.delete()
+              with open(f'{message.chat.id}.txt', 'a+') as text_path:  
+                       await message.reply_document(f"{message.chat.id}.txt",caption="©@BugHunterBots")      
          
-          os.remove(pdf_path)
-          os.remove(f"{message.chat.id}.txt")  
+             os.remove(pdf_path)
+             os.remove(f"{message.chat.id}.txt")  
           
       except ValueError as error :
            await txt.delete()
