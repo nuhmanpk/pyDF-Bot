@@ -98,6 +98,7 @@ async def pdf_to_text(bot, message):
                await txt.edit("Downloaded File")
           except ValueError as error :
                await message.reply_text(f"{error}")
+               await txt.delete()
           try : 
                pdf = open(pdf_path,'rb')
                pdf_reader = PyPDF2.PdfFileReader(pdf) #pdfReaderObject
@@ -107,8 +108,9 @@ async def pdf_to_text(bot, message):
                page_no = pdf_reader.getPage(0) # pageObject
                await txt.edit("Extracting Text from PDF...")
                page_content = """ """ # EmptyString   
-          except PdfReadError as error:
+          except Exception as error:
                await message.reply_text("Doesn't seems like a valid PDF File 😣")   
+               await txt.delete()
           with open(f'{message.chat.id}.txt', 'a+') as text_path:   
                 for page in range (0,num_of_pages):
                     file_write = open(f'{message.chat.id}.txt','a+')
@@ -122,6 +124,7 @@ async def pdf_to_text(bot, message):
                     except Exception as error:
                         print (error)
                         await message.reply_text("Oops Error Occurred!!")
+                        await txt.delete()
           with open(f'{message.chat.id}.txt', 'a+') as text_path:  
               await message.reply_document(f"{message.chat.id}.txt",caption="©@BugHunterBots")      
          
