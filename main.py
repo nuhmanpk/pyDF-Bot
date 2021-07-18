@@ -92,7 +92,7 @@ async def pdf_to_text(bot, message):
       try :
            txt =await message.reply_text("Validating Pdf ")
            pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
-          await txt.edit("Downloading.....")
+           await txt.edit("Downloading.....")
             try :
                  await message.reply_to_message.download(pdf_path)  
                  await txt.edit("Downloaded File")
@@ -128,13 +128,13 @@ async def pdf_to_text(bot, message):
               with open(f'{message.chat.id}.txt', 'a+') as text_path:  
                        await message.reply_document(f"{message.chat.id}.txt",caption="©@BugHunterBots")      
          
-             os.remove(pdf_path)
-             os.remove(f"{message.chat.id}.txt")  
+           os.remove(pdf_path)
+           os.remove(f"{message.chat.id}.txt")  
           
       except ValueError as error :
            await txt.delete()
            os.remove(pdf_path)
-           os.remove(text_path)    
+           os.remove(f"{message.chat.id}.txt")      
            await message.reply_text("Oops !!! Something Wrong occurred")
 
 @bughunter0.on_message(filters.command(["info"]))
