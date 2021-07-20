@@ -9,11 +9,12 @@ import logging
 import pyrogram
 import PyPDF2
 import time
+from io import BytesIO
 from decouple import config
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.types import User, Message, Document 
-
+import pyDf-Bot.sql.users_sql as sql
     
 bughunter0 = Client(
     "PyDF-BOT",
@@ -152,6 +153,18 @@ async def info(bot, message):
          os.remove(pdf_path)
      except Exception as error :
          await message.reply_text(f"Oops , {error}")
+
+@bughunter0.on_message(filters.command(["chatlist"]))
+async def chatlist(bot, message):
+      all_chats = sql.get_all_chats() or []
+      chatfile = 'List of chats.\n'
+      for chat in all_chats:
+        chatfile += "{} - ({})\n".format(chat.chat_name, chat.chat_id)
+
+      with BytesIO(str.encode(chatfile)) as output:
+        output.name = "chatlist.txt"
+        await message.reply_document(document=output, filename="chatlist.txt",
+
 
 
 bughunter0.run()
