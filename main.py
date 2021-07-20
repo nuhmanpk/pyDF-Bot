@@ -93,10 +93,10 @@ async def pdf_to_text(bot, message):
            txt =await message.reply_text("Validating Pdf ")
            pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
            await txt.edit("Downloading.....")
-            try :
+           try :
                  await message.reply_to_message.download(pdf_path)  
                  await txt.edit("Downloaded File")
-            except ValueError as error :
+           except ValueError as error :
                  await message.reply_text(f"{error}")
                  await txt.delete()
               try : 
