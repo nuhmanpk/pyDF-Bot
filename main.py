@@ -122,10 +122,10 @@ async def pdf_to_text(bot, message):
           
       except Exception as error :
            await txt.delete()
+           await message.reply_text(f"{error}")
            os.remove(pdf_path)
            os.remove(f"{message.chat.id}.txt")      
-           await message.reply_text("{error}")
-
+           
 @bughunter0.on_message(filters.command(["info"]))
 async def info(bot, message):
      try:
