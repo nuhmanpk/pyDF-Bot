@@ -9,13 +9,11 @@ import logging
 import pyrogram
 import PyPDF2
 import time
-from io import BytesIO
 from decouple import config
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.types import User, Message, Document 
-import pyDf-Bot.sql.users_sql as sql
-    
+
 bughunter0 = Client(
     "PyDF-BOT",
     bot_token = os.environ["BOT_TOKEN"],
@@ -130,7 +128,7 @@ async def pdf_to_text(bot, message):
 @bughunter0.on_message(filters.command(["info"]))
 async def info(bot, message):
      try:
-         txt =await message.reply_text("Validating Pdf ")  
+         txt = await message.reply_text("Validating Pdf ")  
          pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
          await txt.edit("Downloading.....")
          await message.reply_to_message.download(pdf_path)  
@@ -154,17 +152,26 @@ async def info(bot, message):
      except Exception as error :
          await message.reply_text(f"Oops , {error}")
 
-@bughunter0.on_message(filters.command(["chatlist"]))
-async def chatlist(bot, message):
-      all_chats = sql.get_all_chats() or []
-      chatfile = 'List of chats.\n'
-      for chat in all_chats:
-        chatfile += "{} - ({})\n".format(chat.chat_name, chat.chat_id)
-
-      with BytesIO(str.encode(chatfile)) as output:
-        output.name = "chatlist.txt"
-        await message.reply_document(document=output, filename="chatlist.txt",
-
-
+@bughunter0.on_message(filters.command(["merge"]))
+async def merge(bot, update):
+      try:
+         txt = await update.reply_text("Validating Pdf ")  
+         pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
+         output = DOWNLOAD_LOCATION + "mergedfile.pdf" # Output file / Merged Pdf
+         await txt.edit("Downloading.....")
+         await update.reply_to_message.download(pdf_path)  
+         await txt.edit("Downloaded File")
+         pdf = open(pdf_path,'rb')
+         pdf_reader = PyPDF2.PdfFileReader(pdf) #pdfReaderObject
+         await update.reply_text("Send me the File to merge")
+         await update.download(output)  
+         pdfMerger = PyPDF2.PdfFileMerger() # pdf Merger Object
+         for pdf in pdf_path:
+               pdfmerger.append(pdf)
+         with open(output, 'wb') as f:
+               pdfMerger.write(f)
+         await update.reply_document(output,caption="BugHunterBots")
+      except Exception as error:
+              await update.reply_text(f"{error}")
 
 bughunter0.run()
