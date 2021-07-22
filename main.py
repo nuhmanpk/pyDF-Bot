@@ -153,25 +153,25 @@ async def info(bot, message):
          await message.reply_text(f"Oops , {error}")
 
 @bughunter0.on_message(filters.command(["merge"]))
-async def merge(bot, update):
+async def merge(bot, message):
       try:
-         txt = await update.reply_text("Validating Pdf ")  
+         txt = await message.reply_text("Validating Pdf ")  
          pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
          output = DOWNLOAD_LOCATION + "mergedfile.pdf" # Output file / Merged Pdf
          await txt.edit("Downloading.....")
-         await update.reply_to_message.download(pdf_path)  
+         await message.reply_to_message.download(pdf_path)  
          await txt.edit("Downloaded File")
          pdf = open(pdf_path,'rb')
          pdf_reader = PyPDF2.PdfFileReader(pdf) #pdfReaderObject
-         await update.reply_text("Send me the File to merge")
-         await update.download(output)  
+         await message.reply_text("Send me the File to merge")
+         await message.download(output)  
          pdfMerger = PyPDF2.PdfFileMerger() # pdf Merger Object
          for pdf in pdf_path:
                pdfmerger.append(pdf)
          with open(output, 'wb') as f:
                pdfMerger.write(f)
-         await update.reply_document(output,caption="BugHunterBots")
+         await message.reply_document(output,caption="BugHunterBots")
       except Exception as error:
-              await update.reply_text(f"{error}")
+              await message.reply_text(f"{error}")
 
 bughunter0.run()
