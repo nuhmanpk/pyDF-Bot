@@ -174,10 +174,11 @@ async def merge(bot, message):
                  pdfMerger.append(pdf)
              with open(output, 'wb') as f:
                  pdfMerger.write(f)
-             await message.reply_document(output,caption="BugHunterBots")
+             await message.reply_document("mergedfile.pdf",caption="BugHunterBots")
           except Exception as error:
              await message.reply_text(f"{error}")
+             print(error)
       except Exception as error:
               await message.reply_text(f"{error}")
-
+              print(error)
 bughunter0.run()
