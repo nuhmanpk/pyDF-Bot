@@ -169,8 +169,8 @@ async def merge(bot, message):
          async def read(bot, message):
           try:
              txt = await message.reply_text("Downloading...")
-             await message.download(output)  
-             pdf_output= open(output,'rb')
+             await message.download(pdf2)  
+             pdf_output= open(pdf2,'rb')
              pdfMerger = PyPDF2.PdfFileMerger() # pdf Merger Object
              pdfs = [pdf_path,pdf2]
              for pdf in pdfs:
