@@ -169,10 +169,11 @@ async def merge(bot, message):
           try:
              txt = await message.reply_text("Downloading...")
              await message.download(output)  
+             pdf_output= open(output,'rb')
              pdfMerger = PyPDF2.PdfFileMerger() # pdf Merger Object
              for pdf in pdf_path:
                  pdfMerger.append(pdf)
-             with open(output, 'wb') as f:
+             with open(pdf_output, 'wb') as f:
                  pdfMerger.write(f)
              await message.reply_text("Uploading...")
              await message.reply_document(document="mergedfile.pdf",caption="BugHunterBots")
