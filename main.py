@@ -157,7 +157,8 @@ async def merge(bot, message):
       try:
          txt = await message.reply_text("Validating Pdf ")  
          pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
-         output = DOWNLOAD_LOCATION + "mergedfile.pdf" # Output file / Merged Pdf
+         pdf2 = DOWNLOAD_LOCATION + "second.pdf" # Second pdf
+         output = DOWNLOAD_LOCATION + "output.pdf" # Output file
          await txt.edit("Downloading.....")
          await message.reply_to_message.download(pdf_path)  
          await txt.edit("Downloaded File")
@@ -171,12 +172,13 @@ async def merge(bot, message):
              await message.download(output)  
              pdf_output= open(output,'rb')
              pdfMerger = PyPDF2.PdfFileMerger() # pdf Merger Object
-             for pdf in pdf_path:
+             pdfs = [pdf_path,pdf2]
+             for pdf in pdfs:
                  pdfMerger.append(pdf)
-             with open(pdf_output, 'wb') as f:
+             with open(output, 'wb') as f:
                  pdfMerger.write(f)
              await message.reply_text("Uploading...")
-             await message.reply_document(document="mergedfile.pdf",caption="BugHunterBots")
+             await message.reply_document(document="output.pdf",caption="BugHunterBots")
           except Exception as error:
              await message.reply_text(f"{error}")
              print(error)
