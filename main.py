@@ -164,7 +164,7 @@ async def merge(bot, message):
          pdf = open(pdf_path,'rb')
          pdf_reader = PyPDF2.PdfFileReader(pdf) #pdfReaderObject
          await message.reply_text("Send me the File to merge")
-         @bughunter0.on_message(filters.document)
+         @bughunter0.on_message((filters.private | filters.forwarded | filters.reply) & filters.document)
          async def read(bot, message):
           try:
              txt = await message.reply_text("Downloading...")
@@ -174,7 +174,8 @@ async def merge(bot, message):
                  pdfMerger.append(pdf)
              with open(output, 'wb') as f:
                  pdfMerger.write(f)
-             await message.reply_document("mergedfile.pdf",caption="BugHunterBots")
+             await message.reply_text("Uploading...")
+             await message.reply_document(document="mergedfile.pdf",caption="BugHunterBots")
           except Exception as error:
              await message.reply_text(f"{error}")
              print(error)
