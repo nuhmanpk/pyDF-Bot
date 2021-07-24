@@ -157,8 +157,8 @@ async def merge(bot, message):
       try:
          txt = await message.reply_text("Validating Pdf ")  
          pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
-         pdf2 = DOWNLOAD_LOCATION + "second.pdf" # Second pdf
-         output = DOWNLOAD_LOCATION + "output.pdf" # Output file
+         pdf2 = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" # Second pdf
+         output = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" # Output file
          await txt.edit("Downloading.....")
          await message.reply_to_message.download(pdf_path)  
          await txt.edit("Downloaded File")
