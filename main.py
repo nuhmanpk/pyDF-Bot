@@ -162,7 +162,7 @@ async def merge(bot, message):
          await txt.edit("Downloading.....")
          await message.reply_to_message.download(pdf_path)  
          await txt.edit("Downloaded File")
-         pdf = open(pdf_path,'rb')
+         pdf1open = open(pdf_path,'rb')
          pdf_reader = PyPDF2.PdfFileReader(pdf) #pdfReaderObject
          await message.reply_text("Send me the File to merge")
          @bughunter0.on_message((filters.private | filters.forwarded | filters.reply) & filters.document)
@@ -170,9 +170,9 @@ async def merge(bot, message):
           try:
              txt = await message.reply_text("Downloading...")
              await message.download(pdf2)  
-             pdf_output= open(pdf2,'rb')
+             pdf2open = open(pdf2,'rb')
              pdfMerger = PyPDF2.PdfFileMerger() # pdf Merger Object
-             pdfs = [pdf_path,pdf2]
+             pdfs = [pdf1open,pdf2open]
              for pdf in pdfs:
                  pdfMerger.append(pdf)
              with open(output, 'wb') as f:
