@@ -32,7 +32,7 @@ ABOUT = """
 **LANGUAGE :** `Python 3.9`
 """
 HELP = """
-No one gonna Help You !!
+Send me a pdf file to Move on
 """
 
 DOWNLOAD_LOCATION = os.environ.get("DOWNLOAD_LOCATION", "./DOWNLOADS/PyDF/")
