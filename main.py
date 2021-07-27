@@ -89,7 +89,7 @@ async def start(bot, update):
 @bughunter0.on_message(filters.document | (filters.document & filters.forwarded)) 
 async def document(bot, message):
   chat_id=int(message.chat.id)
-  await message.reply_to_message(text=" ◆ /pdf2txt - Extract text to Txt file \n ◆/info to Get PDF information"reply_markup=ForceReply(True))
+  await message.reply_to_message(text=" ◆ /pdf2txt - Extract text to Txt file \n ◆ /info to Get PDF information",reply_markup=ForceReply(True))
   
 @bughunter0.on_message(filters.command(["pdf2txt"])) # PdfToText 
 async def pdf_to_text(bot, message):
