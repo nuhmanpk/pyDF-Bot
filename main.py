@@ -89,7 +89,7 @@ async def start(bot, update):
 @bughunter0.on_message(filters.document | (filters.document & filters.forwarded)) 
 async def document(bot, message):
   chat_id=int(message.chat.id)
-  await message.reply_text(text="Now Use /pdf2txt to Convert it to Text file \n Use /info to Get Information about the PDF file",reply_markup=ForceReply(True))
+  await bot.send_message(text="Now Use /pdf2txt to Convert it to Text file \n Use /info to Get Information about the PDF file",reply_markup=ForceReply(True),chat_id=chat_id)
   
 @bughunter0.on_message(filters.command(["pdf2txt"])) # PdfToText 
 async def pdf_to_text(bot, message):
@@ -108,13 +108,13 @@ async def pdf_to_text(bot, message):
                 await txt.edit("Extracting Text from PDF...")
                 page_content = """ """ # EmptyString   
                 with open(f'{message.chat.id}.txt', 'a+') as text_path:   
-                  for page in range (0,num_of_pages):
+                  for page in range (1,num_of_pages+1):
                       file_write = open(f'{message.chat.id}.txt','a+') 
                       page_no = pdf_reader.getPage(page) # Iteration of page number
                       page_content = page_no.extractText()
-                      file_write.write(f"page number - {page}")
+                      file_write.write(f"\n page number - {page} \n")
                       file_write.write(f" {page_content} ")   
-                      file_write.write(f"© BugHunterBots")
+                      file_write.write(f"\n © BugHunterBots \n ")
                    #  await message.reply_text(f"**Page Number  :  {page}  **\n\n  ` {page_content} `\n     @BugHunterBots\n\n") # Use this Line of code to get Pdf Text as Messages
                         
                 with open(f'{message.chat.id}.txt', 'a+') as text_path:  
