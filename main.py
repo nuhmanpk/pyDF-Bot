@@ -88,7 +88,7 @@ async def start(bot, update):
 
 @bughunter0.on_message(filters.document | (filters.document & filters.forwarded)) 
 async def document(bot, message):
-  message_id=int(message.id)
+  message_id=int(message.message_id)
   await message.reply_text(text=" ◆ /pdf2txt - Extract text to Txt file \n ◆ /info to Get PDF information",reply_markup=ForceReply(True),reply_to_message_id=message_id)
   
 @bughunter0.on_message(filters.command(["pdf2txt"])) # PdfToText 
