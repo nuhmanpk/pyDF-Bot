@@ -100,9 +100,9 @@ async def pdf_to_text(bot, message):
       try :
            if message.reply_to_message:
                 pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
-                txt = await message.reply_text("Downloading.....")  
+                txt = "Downloading....." 
                 c_time = time.time()
-                await message.reply_to_message.download(pdf_path,progress=progress_for_pyrogram,progress_args=( "```Trying To Uploading```", c_time   ))  
+                await message.reply_to_message.download(pdf_path,progress=progress_for_pyrogram,progress_args=( "```Trying to Download```", c_time,txt))  
                 await txt.edit("Downloaded File")
                 pdf = open(pdf_path,'rb')
                 pdf_reader = PyPDF2.PdfFileReader(pdf) #pdfReaderObject
