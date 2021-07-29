@@ -99,8 +99,9 @@ async def document(bot, message):
 async def pdf_to_text(bot, message):
       try :
            if message.reply_to_message:
+                txt = await message.reply_text("Validating")
                 pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
-                txt = "Downloading....." 
+                await txt.edit("Downloading.....")
                 c_time = time.time()
                 await message.reply_to_message.download(pdf_path,progress=progress_for_pyrogram,progress_args=( "```Trying to Download```", c_time,txt))  
                 await txt.edit("Downloaded File")
