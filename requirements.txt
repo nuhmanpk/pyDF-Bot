@@ -2,3 +2,4 @@ pyrogram
 python-decouple
 tgcrypto
 PyPDF2
+humanize
