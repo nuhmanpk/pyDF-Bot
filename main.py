@@ -13,7 +13,6 @@ from decouple import config
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ForceReply
 from pyrogram.types import User, Message, Document 
-from helper.progress import progress_for_pyrogram
 
 
 
