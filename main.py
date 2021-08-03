@@ -123,6 +123,7 @@ async def pdf_to_text(bot, message):
                    #  await message.reply_text(f"**Page Number  :  {page}  **\n\n  ` {page_content} `\n     @BugHunterBots\n\n") # Use this Line of code to get Pdf Text as Messages
                         
                 with open(f'{message.chat.id}.txt', 'a+') as text_path:  
+                      file_write.write("THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE")
                       await message.reply_document(f"{message.chat.id}.txt",caption="©@BugHunterBots")      
          
                 os.remove(pdf_path)
@@ -165,38 +166,6 @@ async def info(bot, message):
      except Exception as error :
          await message.reply_text(f"Oops , {error}")
 
-@bughunter0.on_message(filters.command(["merge"])) # Under Maintenance
-async def merge(bot, message):
-      try:
-         txt = await message.reply_text("Validating Pdf ")  
-         pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
-         pdf2 = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" # Second pdf
-         output = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" # Output file
-         await txt.edit("Downloading.....")
-         await message.reply_to_message.download(pdf_path)  
-         await txt.edit("Downloaded File")
-         pdf = open(pdf_path,'rb')
-         pdf_reader = PyPDF2.PdfFileReader(pdf) #pdfReaderObject
-         await message.reply_text("Send me the File to merge")
-         @bughunter0.on_message((filters.private | filters.forwarded | filters.reply) & filters.document)
-         async def read(bot, message):
-          try:
-             txt = await message.reply_text("Downloading...")
-             await message.download(pdf2)  
-             pdf2open = open(pdf2,'rb')
-             pdfMerger = PyPDF2.PdfFileMerger() # pdf Merger Object
-             pdfs = [pdf_path,pdf2]
-             for pdf in pdfs:
-                 pdfMerger.append(pdf)
-             with open(output, 'wb') as f:
-                 pdfMerger.write(f)
-             await message.reply_text("Uploading...")
-             await message.reply_document(document=output ,caption="@BugHunterBots")
-             return
-          except Exception as error:
-             await message.reply_text(f"{error}")
-             print(error)
-      except Exception as error:
-              await message.reply_text(f"{error}")
-              print(error)
+# @bughunter0.on_message(filters.command(["merge"])) # Under Maintenance
+
 bughunter0.run()
