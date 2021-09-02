@@ -113,7 +113,7 @@ async def cb_data(bot, message):
            else :
                 await message.reply("Please Reply to PDF file")
       except Exception as error :
-           await txt.delete()
+         #  await txt.delete()
            await message.reply_text(f"{error}")
            os.remove(pdf_path)
            os.remove(f"{message.chat.id}.txt")                
