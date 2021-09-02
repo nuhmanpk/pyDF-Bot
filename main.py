@@ -84,16 +84,16 @@ async def cb_data(bot, update):
       try :
            
                 pdf_path = DOWNLOAD_LOCATION + f"{update.chat.id}.pdf" #pdfFileObject
-                txt = await update.reply("Downloading.....")
+                await update.message.edit_text("Downloading.....")
                 await update.reply_to_message.download(pdf_path)  
                 await txt.edit("Downloaded File")
                 pdf = open(pdf_path,'rb')
                 pdf_reader = PyPDF2.PdfFileReader(pdf) #pdfReaderObject
-                await txt.edit("Getting Number of Pages....")
+                await update.message.edit_text("Getting Number of Pages....")
                 num_of_pages = pdf_reader.getNumPages() # Number of Pages
-                await txt.edit(f"Found {num_of_pages} Page")
+                await update.message.edit_text(f"Found {num_of_pages} Page")
                 page_no = pdf_reader.getPage(0) # pageObject
-                await txt.edit("Extracting Text from PDF...")
+                await update.message.edit_text("Extracting Text from PDF...")
                 page_content = """ """ # EmptyString   
                 with open(f'{update.chat.id}.txt', 'a+') as text_path:   
                   for page in range (0,num_of_pages):
@@ -114,13 +114,13 @@ async def cb_data(bot, update):
                
       except Exception as error :
          #  await txt.delete()
-           await update.reply_text(f"{error}")
+           await update.message.edit_text(f"{error}")
            os.remove(pdf_path)
            os.remove(f"{update.chat.id}.txt")                
     elif update.data == "cbinfo":
      try:
          
-              txt = await update.reply_text("Validating Pdf ")  
+              txt = await update.message.edit_text("Validating Pdf ")  
               pdf_path = DOWNLOAD_LOCATION + f"{update.chat.id}.pdf" #pdfFileObject
               await txt.edit("Downloading.....")
               await update.reply_to_message.download(pdf_path)  
