@@ -59,43 +59,28 @@ CLOSE_BUTTON = InlineKeyboardMarkup(
         ]]
     )
 
+PDF_BUTTON = InlineKeyboardMarkup(
+        [[
+        InlineKeyboardButton('PDF TO TXT',callback_data='cb2txt'),
+        InlineKeyboardButton('PDF INFO',callback_data='cbinfo')
+        ]]
+    )
+
 @bughunter0.on_callback_query() # callbackQuery()
-async def cb_data(bot, update):  
-    if update.data == "cbhelp":
-        await update.message.edit_text(
+async def cb_data(bot, message):  
+    if message.data == "cbhelp":
+        await message.edit_text(
             text=HELP,
             reply_markup=CLOSE_BUTTON,
             disable_web_page_preview=True
         )
-    elif update.data == "cbabout":
-        await update.message.edit_text(
+    elif message.data == "cbabout":
+        await message.edit_text(
             text=ABOUT,
             reply_markup=CLOSE_BUTTON,
             disable_web_page_preview=True
         )
-    else:
-        await update.message.edit_text(
-            text=START_STR.format(update.from_user.mention),
-            disable_web_page_preview=True,
-            reply_markup=START_BUTTON
-        )
-
-@bughunter0.on_message(filters.command(["start"])) # StartCommand
-async def start(bot, update):
-     await update.reply_text(
-        text=START_STR.format(update.from_user.mention),
-        disable_web_page_preview=True,
-        reply_markup=START_BUTTON
-    )
-
-@bughunter0.on_message(filters.document | (filters.document & filters.forwarded)) 
-async def document(bot, message):
-  message_id=int(message.message_id)
-  chat_id=int(message.chat.id)
-  await bot.send_message(text=" ◆ /pdf2txt - Extract text to Txt file \n ◆ /info to Get PDF information",reply_to_message_id=message_id,chat_id=chat_id)
-  
-@bughunter0.on_message(filters.command(["pdf2txt"])) # PdfToText 
-async def pdf_to_text(bot, message):
+    elif message.data == "cb2txt":
       try :
            if message.reply_to_message:
                 pdf_path = DOWNLOAD_LOCATION + f"{message.chat.id}.pdf" #pdfFileObject
@@ -131,10 +116,8 @@ async def pdf_to_text(bot, message):
            await txt.delete()
            await message.reply_text(f"{error}")
            os.remove(pdf_path)
-           os.remove(f"{message.chat.id}.txt")      
-           
-@bughunter0.on_message(filters.command(["info"]))
-async def info(bot, message):
+           os.remove(f"{message.chat.id}.txt")                
+    elif message.data == "cbinfo":
      try:
          if message.reply_to_message:
               txt = await message.reply_text("Validating Pdf ")  
@@ -162,6 +145,32 @@ async def info(bot, message):
              await message.reply_text("Please Reply to a Pdf File")
      except Exception as error :
          await message.reply_text(f"Oops , {error}")
+
+
+    else:
+        await message.edit_text(
+            text=START_STR.format(update.from_user.mention),
+            disable_web_page_preview=True,
+            reply_markup=START_BUTTON
+        )
+
+@bughunter0.on_message(filters.command(["start"])) # StartCommand
+async def start(bot, update):
+     await update.reply_text(
+        text=START_STR.format(update.from_user.mention),
+        disable_web_page_preview=True,
+        reply_markup=START_BUTTON
+    )
+
+@bughunter0.on_message(filters.document | (filters.document & filters.forwarded)) 
+async def document(bot, message):
+  txt = await message.reply_text(
+        text="Select An option",
+        reply_markup=PDF_BUTTON
+    )
+
+@bughunter0.on_message(filters.command(["info"]))
+async def info(bot, message):
 
 # @bughunter0.on_message(filters.command(["merge"])) # Under Maintenance
 
