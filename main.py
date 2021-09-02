@@ -169,9 +169,4 @@ async def document(bot, message):
         reply_markup=PDF_BUTTON
     )
 
-@bughunter0.on_message(filters.command(["info"]))
-async def info(bot, message):
-
-# @bughunter0.on_message(filters.command(["merge"])) # Under Maintenance
-
 bughunter0.run()
