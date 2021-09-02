@@ -82,7 +82,7 @@ async def cb_data(bot, update):
         )
     elif update.data == "cb2txt":
       try :
-           if update.reply_to_message:
+           
                 pdf_path = DOWNLOAD_LOCATION + f"{update.chat.id}.pdf" #pdfFileObject
                 txt = await update.reply("Downloading.....")
                 await update.reply_to_message.download(pdf_path)  
@@ -110,8 +110,8 @@ async def cb_data(bot, update):
          
                 os.remove(pdf_path)
                 os.remove(f"{update.chat.id}.txt")  
-           else :
-                await update.reply("Please Reply to PDF file")
+           
+               
       except Exception as error :
          #  await txt.delete()
            await update.reply_text(f"{error}")
@@ -119,7 +119,7 @@ async def cb_data(bot, update):
            os.remove(f"{update.chat.id}.txt")                
     elif update.data == "cbinfo":
      try:
-         if update.reply_to_message:
+         
               txt = await update.reply_text("Validating Pdf ")  
               pdf_path = DOWNLOAD_LOCATION + f"{update.chat.id}.pdf" #pdfFileObject
               await txt.edit("Downloading.....")
@@ -141,8 +141,8 @@ async def cb_data(bot, update):
 **Pages :** `{num_of_pages}`""")
 
               os.remove(pdf_path)
-         else:
-             await update.reply_text("Please Reply to a Pdf File")
+      
+       
      except Exception as error :
          await update.reply_text(f"Oops , {error}")
 
