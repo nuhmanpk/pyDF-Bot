@@ -9,3 +9,5 @@ Pydf - Pyrogram Document File Bot, a modular Telegram Bot which provides Pdf Too
 # Credits
 Pyrogram
 Pypdf2
+
+# No longer maintained
