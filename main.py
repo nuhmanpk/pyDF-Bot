@@ -158,6 +158,6 @@ async def info(bot, message):
      except Exception as error :
          await message.reply_text(f"Oops , {error}")
 
-# @bughunter0.on_message(filters.command(["merge"])) # Under Maintenance
+# @bughunter0.on_message(filters.command(["merge"])) # will Be added Soon
 
 bughunter0.run()
